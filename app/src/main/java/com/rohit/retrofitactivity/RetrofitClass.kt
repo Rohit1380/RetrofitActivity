@@ -1,6 +1,7 @@
 package com.rohit.retrofitactivity
 
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class RetrofitClass {
     lateinit var apiInterface: ApiInterface
@@ -8,9 +9,10 @@ class RetrofitClass {
 
     fun getRetrofit() :ApiInterface{
         retrofit=Retrofit.Builder()
-            .baseUrl("https://gorest.co.in/public/v2/users/502")
+            .baseUrl("https://gorest.co.in/public/v2/")
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
-        apiInterface=retrofit.create(apiInterface::class.java)
+        apiInterface=retrofit.create(ApiInterface::class.java)
         return apiInterface
     }
 }

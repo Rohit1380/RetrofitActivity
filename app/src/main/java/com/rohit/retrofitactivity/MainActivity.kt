@@ -1,24 +1,22 @@
 package com.rohit.retrofitactivity
 
-import UserResponse
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.UserHandle
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
     lateinit var retrofitClass: RetrofitClass
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        System.out.println("in on create")
 
-        var retrofitClass:Call<UserResponse> =RetrofitClass().getRetrofit().getUserInfo()
-        retrofitClass.enqueue(object :Callback<UserResponse>{
+        var retrofitClass:Call<UserModel> =RetrofitClass().getRetrofit().getUserInfo()
+        retrofitClass.enqueue(object :Callback<UserModel>{
             override fun onResponse
-                        (call: Call<UserResponse>, response: Response<UserResponse>) {
+                        (call: Call<UserModel>, response: Response<UserModel>) {
 
                     System.out.println("in response body ${response.body()}")
                     System.out.println("in response ${response}")
@@ -27,10 +25,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
 
-            override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+            override fun onFailure(call: Call<UserModel>, t: Throwable) {
                 System.out.println("in failure ${t.message}")
             }
             })
-
         }
 }
